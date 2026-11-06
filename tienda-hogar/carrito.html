@@ -1,0 +1,286 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnolia - Mi carrito</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .checkout {
+            max-width: 650px;
+            margin: 35px auto;
+            padding: 28px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(0,0,0,.07);
+        }
+
+        .checkout h2, .checkout h3 {
+            color: #5b6250;
+            margin-bottom: 18px;
+        }
+
+        .checkout label {
+            display: block;
+            margin: 14px 0 6px;
+            font-weight: 600;
+        }
+
+        .checkout input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8d8d0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        .checkout input:focus {
+            outline: 2px solid #a9b49a;
+            border-color: #849475;
+        }
+
+        .tarjeta-ayuda {
+            background: #f1f4ed;
+            padding: 14px;
+            border-radius: 10px;
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .campos-tarjeta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .campo-completo {
+            grid-column: 1 / -1;
+        }
+
+        .checkout button {
+            margin-top: 22px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .aviso-seguridad {
+            color: #666;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .checkout {
+                padding: 18px;
+                margin: 20px 10px;
+            }
+
+            .campos-tarjeta {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-completo {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/icons/logo.jpeg"
+                 alt="Magnolia" class="logo-img">
+        </a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Tienda</a>
+        <a href="catalogo.html">Categorías</a>
+    </nav>
+
+    <div class="nav-icons">
+        <a href="carrito.html" class="active">
+            🛒 <span id="cart-count">0</span>
+        </a>
+    </div>
+</header>
+
+<main class="cart-page">
+    <h2>Mi carrito</h2>
+    <p>Revisá los productos que elegiste para tu hogar.</p>
+
+    <div id="cart-items"></div>
+
+    <section class="cart-summary">
+        <h3>Total de la compra: $<span id="cart-total">0</span></h3>
+
+        <button id="clear-cart" class="btn-primary" type="button">
+            Vaciar carrito
+        </button>
+
+        <a href="catalogo.html" class="btn-primary">
+            Seguir comprando
+        </a>
+    </section>
+
+    <section class="checkout">
+        <h2>Finalizar compra</h2>
+        <p>Completá tus datos para continuar con el pago.</p>
+
+        <form action="guardar_pedido.php"
+              method="POST"
+              id="checkout-form">
+
+            <label for="nombre_cliente">Nombre completo</label>
+            <input type="text" id="nombre_cliente"
+                   name="nombre_cliente"
+                   maxlength="150" autocomplete="name" required>
+
+            <label for="email_cliente">Correo electrónico</label>
+            <input type="email" id="email_cliente"
+                   name="email_cliente"
+                   maxlength="150" autocomplete="email" required>
+
+            <h3 style="margin-top:28px;">Pago con tarjeta de crédito</h3>
+
+            <div class="tarjeta-ayuda">
+                <strong>Modo de prueba académica</strong><br>
+                Tarjeta de prueba: 4111 1111 1111 1111<br>
+                Vencimiento: cualquier fecha futura<br>
+                Código de seguridad: 123<br>
+                No uses los datos de una tarjeta real.
+            </div>
+
+            <div class="campos-tarjeta">
+                <div class="campo-completo">
+                    <label for="titular">Titular de la tarjeta</label>
+                    <input type="text" id="titular"
+                           name="titular"
+                           maxlength="100"
+                           autocomplete="off"
+                           required>
+                </div>
+
+                <div class="campo-completo">
+                    <label for="numero_tarjeta">Número de tarjeta</label>
+                    <input type="text" id="numero_tarjeta"
+                           name="numero_tarjeta"
+                           inputmode="numeric"
+                           maxlength="19"
+                           placeholder="4111 1111 1111 1111"
+                           autocomplete="off"
+                           required>
+                </div>
+
+                <div>
+                    <label for="vencimiento">Vencimiento (MM/AA)</label>
+                    <input type="text" id="vencimiento"
+                           name="vencimiento"
+                           placeholder="12/28"
+                           maxlength="5"
+                           inputmode="numeric"
+                           autocomplete="off"
+                           required>
+                </div>
+
+                <div>
+                    <label for="cvv">Código de seguridad</label>
+                    <input type="password" id="cvv"
+                           name="cvv"
+                           inputmode="numeric"
+                           maxlength="4"
+                           placeholder="123"
+                           autocomplete="off"
+                           required>
+                </div>
+            </div>
+
+            <input type="hidden" id="carrito_json"
+                   name="carrito_json">
+
+            <button type="submit" class="btn-primary">
+                Pagar y confirmar pedido
+            </button>
+
+            <p class="aviso-seguridad">
+                Simulación educativa. No se procesa ningún pago real.
+                Los datos de la tarjeta no se guardan en la base de datos.
+            </p>
+        </form>
+    </section>
+</main>
+
+<script src="js/main.js"></script>
+<script src="js/carrito.js"></script>
+
+<script>
+document.getElementById("checkout-form").addEventListener(
+    "submit",
+    function (e) {
+        let carrito = [];
+
+        try {
+            carrito = JSON.parse(
+                localStorage.getItem("magnoliaCarrito") || "[]"
+            );
+        } catch (error) {
+            carrito = [];
+        }
+
+        if (!Array.isArray(carrito) || carrito.length === 0) {
+            e.preventDefault();
+            alert("Tu carrito está vacío.");
+            return;
+        }
+
+        document.getElementById("carrito_json").value =
+            JSON.stringify(
+                carrito.map(function (p) {
+                    return {
+                        id: Number(p.id),
+                        cantidad: Number(p.cantidad) || 1
+                    };
+                })
+            );
+    }
+);
+
+// Formato del número de tarjeta.
+document.getElementById("numero_tarjeta").addEventListener(
+    "input", function () {
+        let numero = this.value.replace(/\D/g, "").slice(0, 16);
+        this.value = numero.match(/.{1,4}/g)?.join(" ") || "";
+    }
+);
+
+// Formato MM/AA.
+document.getElementById("vencimiento").addEventListener(
+    "input", function () {
+        let valor = this.value.replace(/\D/g, "").slice(0, 4);
+
+        if (valor.length > 2) {
+            valor = valor.slice(0, 2) + "/" + valor.slice(2);
+        }
+
+        this.value = valor;
+    }
+);
+
+// Permite solamente números en el código de seguridad.
+document.getElementById("cvv").addEventListener(
+    "input", function () {
+        this.value = this.value.replace(/\D/g, "").slice(0, 4);
+    }
+);
+</script>
+
+</body>
+</html>
+```

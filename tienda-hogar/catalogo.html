@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnolia | Tienda</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="navbar">
+      <div class="logo">
+    <a href="index.html">
+        <img src="assets/icons/logo.jpeg" alt="Magnolia" class="logo-img">
+    </a>
+</div>
+
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html" class="active">Tienda</a>
+            <a href="catalogo.html#categorias">Categorías</a>
+        </nav>
+
+        <div class="nav-icons">
+            <a href="carrito.html">🛒 <span id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main class="catalog-page">
+        <section class="catalog-intro">
+            <p class="catalog-label">MAGNOLIA · HOME AND DESIGN</p>
+            <h2>Encontrá tu próximo detalle favorito</h2>
+            <p>Objetos que hacen de cada rincón un lugar especial.</p>
+        </section>
+
+        <section id="categorias" class="catalog-categories">
+            <h3>Explorá nuestra tienda</h3>
+            <div class="category-buttons">
+                <button type="button" data-category="Todos">Todos</button>
+                <button type="button" data-category="Cuadros">Cuadros</button>
+                <button type="button" data-category="Velas">Velas</button>
+                <button type="button" data-category="Almohadones">Almohadones</button>
+                <button type="button" data-category="Iluminación">Iluminación</button>
+                <button type="button" data-category="Decoración">Decoración</button>
+            </div>
+        </section>
+
+        <section class="catalog-search">
+    <input
+        type="search"
+        id="search-product"
+        placeholder="Buscar cuadros, velas, lámparas..."
+        aria-label="Buscar productos"
+    >
+</section>
+
+        <section class="catalog-products">
+            <div class="catalog-heading">
+                <h3>Nuestros productos</h3>
+                <span id="product-count"></span>
+            </div>
+
+            <div id="catalog-products-grid" class="product-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <h3>Magnolia</h3>
+        <p>Home and design · Detalles que hacen la diferencia.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/catalogo.js"></script>
+
+</body>
+</html>

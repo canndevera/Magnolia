@@ -1,0 +1,65 @@
+<!-- Método de Pago (Con opciones elegibles) -->
+            <div class="checkout-section">
+                <h3>2. Método de Pago</h3>
+                
+                <div class="payment-methods" style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="card" id="optionCard" checked> Tarjeta de Crédito / Débito
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="transferencia" id="optionTransfer"> Transferencia Bancaria
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment_method" value="efectivo" id="optionCash"> Efectivo al retirar
+                    </label>
+                </div>
+
+                <!-- Contenedor de la Tarjeta (Se oculta si eligen otro método) -->
+                <div id="cardPaymentContainer">
+                    <!-- Tarjeta Interactiva Visual -->
+                    <div class="credit-card-preview">
+                        <div class="card-top">
+                            <div class="card-chip"></div>
+                            <div class="card-brand">VISA</div>
+                        </div>
+                        <div class="card-number-display" id="displayNum">4111 1111 1111 1111</div>
+                        <div class="card-info-row">
+                            <div class="card-holder">
+                                <span class="label">Titular</span>
+                                <span id="displayName">NOMBRE APELLIDO</span>
+                            </div>
+                            <div class="card-expires">
+                                <span class="label">Expira</span>
+                                <span id="displayExp">MM/AA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inputs del Formulario de Tarjeta -->
+                    <div class="card-form-inputs">
+                        <div class="form-group">
+                            <label for="cardNumber">Número de Tarjeta</label>
+                            <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="4111 1111 1111 1111">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardHolderName">Nombre del Titular</label>
+                            <input type="text" id="cardHolderName" name="cardHolderName" placeholder="Como figura en la tarjeta">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExp">Vencimiento</label>
+                                <input type="text" id="cardExp" name="cardExp" maxlength="5" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="password" id="cardCvv" name="cardCvv" maxlength="4" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje alternativo si eligen transferencia o efectivo -->
+                <div id="alternativePaymentMessage" style="display: none; padding: 15px; background: #fdfaf6; border-radius: 8px; color: #5c4033; font-size: 0.9rem;">
+                    <p id="altText">Te enviaremos los datos necesarios para completar tu pago una vez confirmado el pedido.</p>
+                </div>
+            </div>
